@@ -1,9 +1,6 @@
 import { Fragment } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import Sidebar from '../components/Navbar/Sidebar';
-import Socials from '../components/Navbar/Socials';
-import Navbar from '../components/Navbar/Navbar';
+
 
 export default function Home() {
   return (
@@ -14,25 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <script src="https://kit.fontawesome.com/05e016c845.js" crossorigin="anonymous"></script>
       </Head>
-      <div className="grid grid-cols-12 gap-4 auto-rows-auto">
-        <Sidebar />
-        <div className="col-span-11">
-          <Navbar />
-        </div>
-        <Socials />
-        
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-        <div className="bg-pink-200 h-screen"></div>
-      </div>
+      <h1>Hi</h1>
     </Fragment>
   )
 }
