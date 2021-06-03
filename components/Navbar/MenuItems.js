@@ -1,26 +1,22 @@
 export const MenuItems = [
     {
-        title: 'Home',
-        path: '/'
+        title: 'About',
+        path: '/about',
     },
     {
-        title: 'About Us',
-        path: '/about'
+        title: 'Services',
+        path: '/services'
     },
     {
-        title: 'Contact Us',
+        title: 'Shop',
+        path: '/shop'
+    },
+    {
+        title: 'Design Studio',
+        path: '/design'
+    },
+    {
+        title: 'Contact',
         path: '/contact'
-    },
-    {
-        title: 'Products',
-        path: '/products'
-    },
-    {
-        title: 'Cart',
-        path: '/cart'
-    },
-    {
-        title: 'Checkout',
-        path: '/checkout'
     }
 ]

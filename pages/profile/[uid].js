@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductCell = () => {
+const profile = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const ProductCell = () => {
     )
 }
 
-export default ProductCell;
+export default profile;
