@@ -83,7 +83,19 @@ export const orderWebhook = functions.https.onRequest( async (req, res) => {
   }
 
   const dataObject = event.data.object;
-  const products = await stripe.checkout.sessions.listLineItems(dataObject.id);
+  const pre = await stripe.checkout.sessions.listLineItems(dataObject.id);
+  const items = await pre.data;
+  const products = items.map((prod) => {
+    const name = prod.price.nickname;
+    const size = prod.description;
+    const quantity = prod.quantity;
+    const temp = {
+      name: name,
+      size: size,
+      quantity: quantity,
+    };
+    return temp;
+  });
   const docRef = admin.firestore().collection("orders").doc();
   await docRef.set({
     checkoutSessionId: dataObject.id,
@@ -91,8 +103,9 @@ export const orderWebhook = functions.https.onRequest( async (req, res) => {
     paymentStatus: dataObject.payment_status,
     shippingInfo: dataObject.shipping,
     amountTotal: dataObject.amount_total,
-    products: products.data,
+    products: products,
     delivered: false,
+    orderDate: admin.firestore.Timestamp.now(),
   });
   res.sendStatus(200);
   return null;

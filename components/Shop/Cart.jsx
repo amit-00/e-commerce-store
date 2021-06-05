@@ -11,10 +11,6 @@ const Cart = () => {
 
     const toggle = () => setActive(!active);
 
-    const checkOut = () => {
-        checkout();
-    }
-
     return (
         <>
             <div className='cursor-pointer bg-black md:bg-white p-2' onClick={toggle} >

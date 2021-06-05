@@ -12,6 +12,13 @@ import { useState } from 'react';
 
 const stripePromise = loadStripe('pk_test_51Iw6vfFt4Z3ThmHtsc7BKwXTMGpej7xfoO39FYw4qxGYDw2kRJFVxMTWpBUysGpBp1qPczBDNaMnD05KcTajBZEV00zbClYKv7');
 
+import dynamic from 'next/dynamic'
+
+const CrispWithNoSSR = dynamic(
+  () => import('../components/crisp'),
+  { ssr: false }
+)
+
 function MyApp({ Component, pageProps }) {
   const [cad, setCad] = useState(true);
   const userData = useUserData();
@@ -32,6 +39,7 @@ function MyApp({ Component, pageProps }) {
               <Component {...pageProps} />
             </div>
             <Footer />
+            <CrispWithNoSSR />
           </UserContext.Provider>
         </CurrencyContext.Provider>
       </CartState>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const CartItem = ({ item, currency }) => {
     const cartContext = useContext(CartContext);
-    const { name, quantity, image, slug, cad, usd, size, key } = item;
+    const { name, quantity, image, slug, cad, usd, size, key, wholesale } = item;
 
     const increaseQuantity = () => {
         cartContext.updateQuantity(key, quantity + 1);
@@ -22,9 +22,9 @@ const CartItem = ({ item, currency }) => {
         <div className='border p-2 mb-2'>
             <img className='' className='w-1/2' src={image} alt="" />
             <h1 className="text-lg my-4">{ name }</h1>
-            <p className="text-gray-500 mb-4">${ currency ? cad : usd } <span className="text-sm">{ currency ? 'cad' : 'usd' }</span></p>
+            <p className="text-gray-500 mb-4">${ currency ? (cad/100).toFixed(2) : (usd/100).toFixed(2) } <span className="text-sm">{ currency ? 'cad' : 'usd' }</span></p>
             <p className="text-gray-500 mb-8">Size: {size}</p>
-            <div className="flex justify-between mb-4">
+            {!wholesale && <div className="flex justify-between mb-4">
                 <button className="border p-2 w-full" onClick={decreaseQuantity}>
                     <i aria-hidden className="fas fa-minus"></i>
                 </button>
@@ -32,7 +32,7 @@ const CartItem = ({ item, currency }) => {
                 <button className="border p-2 w-full" onClick={increaseQuantity}>
                     <i aria-hidden className="fas fa-plus"></i>
                 </button>
-            </div>
+            </div>}
             <div className="flex justify-between">
                 <button className='p-2 bg-red-500 text-white w-full mr-2' onClick={deleteItem} >
                     <i aria-hidden className="fas fa-times"></i>
@@ -51,7 +51,7 @@ export default CartItem;
 
 export const CheckoutItem = ({ item, currency }) => {
     const cartContext = useContext(CartContext);
-    const { name, quantity, image, slug, cad, usd, size, key } = item;
+    const { name, quantity, image, slug, cad, usd, size, key, wholesale } = item;
 
     const increaseQuantity = () => {
         cartContext.updateQuantity(key, quantity + 1);
@@ -70,9 +70,9 @@ export const CheckoutItem = ({ item, currency }) => {
             <img className='w-72 md:mr-8' src={image} alt="" />
             <div className='w-full' >
                 <h1 className="text-lg my-4">{ name }</h1>
-                <p className="text-gray-500 mb-4">${ currency ? cad : usd } <span className="text-sm">{ currency ? 'cad' : 'usd' }</span></p>
+                <p className="text-gray-500 mb-4">${ currency ? (cad/100).toFixed(2) : (usd/100).toFixed(2) } <span className="text-sm">{ currency ? 'cad' : 'usd' }</span></p>
                 <p className="text-gray-500 mb-8">Size: {size}</p>
-                <div className="flex justify-between mb-4">
+                {!wholesale && <div className="flex justify-between mb-4">
                     <button className="border p-2 w-full" onClick={decreaseQuantity}>
                         <i aria-hidden className="fas fa-minus"></i>
                     </button>
@@ -80,7 +80,7 @@ export const CheckoutItem = ({ item, currency }) => {
                     <button className="border p-2 w-full" onClick={increaseQuantity}>
                         <i aria-hidden className="fas fa-plus"></i>
                     </button>
-                </div>
+                </div>}
                 <div className="flex justify-between">
                     <button className='p-2 bg-red-500 text-white w-full mr-2' onClick={deleteItem} >
                         <i aria-hidden className="fas fa-times"></i>

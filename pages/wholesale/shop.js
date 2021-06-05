@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { Fragment } from 'react-is';
 import ProductGrid from '../../components/Shop/ProductGrid';
-import { firestore } from '../../lib/firebase';
+import { firestore, checkUserStatus } from '../../lib/firebase';
+import { UserContext } from '../../lib/context';
 import Spinner from '../../components/Layout/Spinner';
 import { FilterIcon} from '@heroicons/react/solid';
 import { ChevronDownIcon, ChevronUpIcon, CheckIcon, SearchIcon, XCircleIcon } from '@heroicons/react/outline';
 
 export async function getServerSideProps({ query }) {
 
-    const productsQuery = firestore.collection('products').where("wholesale", "==", true);
+    const productsQuery = firestore.collection('products');
     
     const snapshot = await productsQuery.get();
 
@@ -25,6 +27,14 @@ export async function getServerSideProps({ query }) {
 }
 
 const Shop = ({ prods, savedCats, quer }) => {
+    const { user } = useContext(UserContext);
+    const [whole, setWhole] = useState(false);
+
+    useEffect(async () => {
+        const status = await checkUserStatus();
+        setWhole(status);
+    }, [user])
+
     const [products, setProducts] = useState(prods);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
@@ -144,7 +154,7 @@ const Shop = ({ prods, savedCats, quer }) => {
     }
 
 
-    return loading || !products ? (
+    return whole ? (loading || !products ? (
         <div className="flex justify-center">
             <Spinner />
         </div>
@@ -154,7 +164,7 @@ const Shop = ({ prods, savedCats, quer }) => {
                 <script src="https://kit.fontawesome.com/05e016c845.js" crossOrigin="anonymous"></script>
             </Head>
             <div className="px-4 mt-12">
-                <h1 className="text-4xl font-medium mb-8">Shop</h1>
+                <h1 className="text-4xl font-medium mb-8">Wholesale Shop</h1>
                 <form onSubmit={e => searchProducts(e)} className='max-w-7xl mx-auto flex items-center justify-center mb-12' >
                     <input autoComplete='off' className='p-2 text-xl border w-full' placeholder='Search' type="text" name='search' value={search} onChange={e => setSearch(e.target.value)} />
                     <button type="submit" className='text-white bg-black py-2 px-4 border border-black' >
@@ -236,12 +246,19 @@ const Shop = ({ prods, savedCats, quer }) => {
                         )}
                     </div>
                     <div className="2xl:col-span-4 xl:col-span-3 md:col-span-2">
-                        { (!loading && products) ?  <ProductGrid products={products} /> : <Spinner /> }
+                        { (!loading && products) ?  <ProductGrid products={products} wholesale={true} /> : <Spinner /> }
                     </div>
                 </div>
 
             </div>
         </Fragment>
+    )) : (
+        <div className='max-w-7xl mx-auto flex flex-col items-center justify-center my-24'>
+            <div className="mb-16 text-6xl text-center">You need a wholesale account to access this page!</div>
+            <Link href='/wholesale' >
+                <a className="p-2 bg-black text-white text-2xl">Register Here</a>
+            </Link>
+        </div>
     )
 }
 

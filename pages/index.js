@@ -2,6 +2,8 @@ import { Fragment, useState } from 'react';
 import Head from 'next/head';
 import Cards from '../components/Home/Cards';
 import Carousel from '../components/Home/Carousel';
+import LinkGrid from '../components/Home/LinkGrid';
+import Subscribe from '../components/Home/Subscribe';
 
 export default function Home() {
   return (
@@ -16,6 +18,8 @@ export default function Home() {
         <Carousel />
       </div>
       <Cards />
+      <LinkGrid />
+      <Subscribe />
     </Fragment>
   )
 }

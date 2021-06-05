@@ -36,8 +36,7 @@ const login = () => {
                     <input className='border w-full p-2' type="password" name='password' value={password} onChange={e => onChange(e)} />
                 </div>
                 <button type="submit" className='px-4 py-2 bg-black text-white block w-full mb-2 text-lg' >Sign In</button>
-                <GoogleLogin />
-                <Link href="/register">
+                <Link href="/wholesale">
                     <a className='text-blue-500 text-sm font-light'>Not registered? Sign Up here</a>
                 </Link>
             </form>

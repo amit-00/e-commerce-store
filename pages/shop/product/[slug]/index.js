@@ -57,7 +57,7 @@ const ProductPage = ({ prod }) => {
                 </div>
                 <article className="2xl:w-3/5 xl:w-4/5">
                     <h1 className="text-3xl mb-12">{ product.name }</h1>
-                    <p className="text-xl border-t border-l border-r px-4 py-4">Price: ${ cad ? product.cad : product.usd } <span className="text-sm">{ cad ? 'cad' : 'usd' }</span></p>
+                    <p className="text-xl border-t border-l border-r px-4 py-4">Price: ${ cad ? (product.cad/100).toFixed(2) : (product.usd/100).toFixed(2) } <span className="text-sm">{ cad ? 'cad' : 'usd' }</span></p>
                     <div className='border-t border-l border-r px-4 py-4' >
                         <p className="text-xl mb-4">Size</p>
                         <div className="flex">
@@ -84,7 +84,7 @@ const ProductPage = ({ prod }) => {
                         </div> 
                     </div>
                     <div className='border px-4 py-4' >
-                        <AddToCart slug={product.slug} qty={quantity} size={size} />
+                        <AddToCart slug={product.slug} qty={quantity} size={size} wholesale={false} />
                     </div>
                     <p className="text-gray-500 mt-8">Description:</p>
                     <p className='text-lg mt-4' >{ product.description }</p>

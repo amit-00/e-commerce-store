@@ -1,17 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Link from 'next/link';
-import { MenuItems }from './MenuItems';
 import Sidebar from './Sidebar';
 import Cart from '../Shop/Cart';
 import SignOut from '../Auth/SignOut';
 import { UserContext } from '../../lib/context';
-import { LoginIcon, BadgeCheckIcon } from '@heroicons/react/outline';
+import { checkUserStatus } from '../../lib/firebase';
 import Dropdown from './Dropdown';
 import CurrencyToggle from '../Shop/CurrencyToggle';
 
 const Navbar = () => {
     const { user } = useContext(UserContext);
     const [hover, setHover] = useState(false);
+    const [whole, setWhole] = useState(false);
+
+    useEffect(async () => {
+        const status = await checkUserStatus();
+        setWhole(status)
+    }, [user])
 
     const enterDropdown = () => {
         if(window.innerWidth < 768) {
@@ -30,12 +35,6 @@ const Navbar = () => {
                 <>
                     <CurrencyToggle />
                     <SignOut styles='text-white md:text-black ml-4 items-center px-4 font-light text-sm' />
-                    <p>|</p>
-                    <Link href={`/profile`}>
-                        <a className='text-white md:text-black items-center px-4 font-light text-sm'>
-                            <p>Profile</p>
-                        </a>
-                    </Link>
                 </>
             ) : (
                 <>  
@@ -48,7 +47,7 @@ const Navbar = () => {
                         </a>
                     </Link>
                     <p>|</p>
-                    <Link href="/register">
+                    <Link href="/wholesale">
                         <a className='text-white md:text-black items-center px-4 font-light text-sm'>
                             <p>Sign Up</p>
                         </a>
@@ -92,6 +91,15 @@ const Navbar = () => {
                                 </Link>
                                 { hover && <Dropdown /> }
                             </li>
+                            {whole && (
+                                <li className='py-6' >
+                                    <Link href='/wholesale/shop' >
+                                        <a className='text-black'>
+                                        Wholesale
+                                        </a>
+                                    </Link>
+                                </li>
+                            )}
                             <li className='py-6' >
                                 <Link href='/design' >
                                     <a className='text-black'>
