@@ -23,7 +23,7 @@ const Cards = () => {
         },
     ]
     return (
-        <div className="mt-24 mb-52">
+        <div className="mt-32 mb-60">
             <div className="bg-black w-full lg:h-96 py-16">
                 <div className="container mx-auto px-8">
                     <h1 className="text-white lg:text-7xl text-4xl font-light">Stay in style with Vinyl Imprint</h1>

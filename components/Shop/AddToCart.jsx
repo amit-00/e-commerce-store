@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../lib/context';
 
-const AddToCart = ({ slug, qty, size, wholesale }) => {
+const AddToCart = ({ slug, qty, wholesale }) => {
     const { addToCart } = useContext(CartContext);
 
     const onClick = () => {
-        addToCart(slug, qty, size, wholesale);
+        addToCart(slug, qty, wholesale);
     }
 
     return (

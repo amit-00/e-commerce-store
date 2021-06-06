@@ -23,22 +23,30 @@ export async function getServerSideProps({ query }) {
 
 const ProductPage = ({ prod }) => {
     const [product] = useState(prod);
-    const [quantity, setQuantity] = useState(1);
-    const [size, setSize] = useState('SM');
+    const [quantitySM, setQuantitySM] = useState(0);
+    const [quantityMD, setQuantityMD] = useState(0);
+    const [quantityLG, setQuantityLG] = useState(0);
+    const [quantityXL, setQuantityXL] = useState(0);
+    const [quantityXXL, setQuantityXXL] = useState(0);
+    const [quantityXXXL, setQuantityXXXL] = useState(0);
     const { cad } = useContext(CurrencyContext);
 
-    const decreaseQuantity = () => {
-        if(quantity <= 1){
-            return setQuantity(1);
-        }
-        setQuantity(quantity - 1);
-    }
+    const increaseSM = () => setQuantitySM(quantitySM + 1);
+    const increaseMD = () => setQuantityMD(quantityMD + 1);
+    const increaseLG = () => setQuantityLG(quantityLG + 1);
+    const increaseXL = () => setQuantityXL(quantityXL + 1);
+    const increaseXXL = () => setQuantityXXL(quantityXXL + 1);
+    const increaseXXXL = () => setQuantityXXXL(quantityXXXL + 1);
 
-    const increaseQuantity = () => {
-        setQuantity(quantity + 1);
-    }
+    const decreaseSM = () => (quantitySM <= 0) ? setQuantitySM(0) : setQuantitySM(quantitySM - 1);
+    const decreaseMD = () => (quantityMD <= 0) ? setQuantityMD(0) : setQuantityMD(quantityMD - 1);
+    const decreaseLG = () => (quantityLG <= 0) ? setQuantityLG(0) : setQuantityLG(quantityLG - 1);
+    const decreaseXL = () => (quantityXL <= 0) ? setQuantityXL(0) : setQuantityXL(quantityXL - 1);
+    const decreaseXXL = () => (quantityXXL <= 0) ? setQuantityXXL(0) : setQuantityXXL(quantityXXL - 1);
+    const decreaseXXXL = () => (quantityXXXL <= 0) ? setQuantityXXXL(0) : setQuantityXXXL(quantityXXXL - 1);
 
-    const changeSize = e => setSize(e.target.value);
+
+    
 
     return prod ? (
         <>
@@ -58,7 +66,7 @@ const ProductPage = ({ prod }) => {
                 <article className="2xl:w-3/5 xl:w-4/5">
                     <h1 className="text-3xl mb-12">{ product.name }</h1>
                     <p className="text-xl border-t border-l border-r px-4 py-4">Price: ${ cad ? (product.cad/100).toFixed(2) : (product.usd/100).toFixed(2) } <span className="text-sm">{ cad ? 'cad' : 'usd' }</span></p>
-                    <div className='border-t border-l border-r px-4 py-4' >
+                    {/* <div className='border-t border-l border-r px-4 py-4' >
                         <p className="text-xl mb-4">Size</p>
                         <div className="flex">
                             <select type="number" className='border p-2' value={size} onChange={e => changeSize(e)} >
@@ -70,8 +78,85 @@ const ProductPage = ({ prod }) => {
                                 <option value="XXXL">XXXL</option>
                             </select>
                         </div> 
-                    </div>
+                    </div> */}
                     <div className='border-t border-l border-r px-4 py-4' >
+                        <p className="text-xl mb-4">Size</p>
+                        <div className="flex flex-col">
+                            <div className="my-2 flex items-center justify-between">
+                                <label>SM: </label>
+                                <div className="flex">
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={decreaseSM}>
+                                        <i aria-hidden className="fas fa-minus"></i>
+                                    </button>
+                                    <input disabled min='0' type="number" className='border p-2' value={quantitySM}  />
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={increaseSM}>
+                                        <i aria-hidden className="fas fa-plus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                            <div className="my-2 flex items-center justify-between">
+                                <label>MD: </label>
+                                <div className="flex">
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={decreaseMD}>
+                                        <i aria-hidden className="fas fa-minus"></i>
+                                    </button>
+                                    <input disabled min='0' type="number" className='border p-2' value={quantityMD} />
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={increaseMD}>
+                                        <i aria-hidden className="fas fa-plus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                            <div className="my-2 flex items-center justify-between">
+                                <label>LG: </label>
+                                <div className="flex">
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={decreaseLG}>
+                                        <i aria-hidden className="fas fa-minus"></i>
+                                    </button>
+                                    <input disabled min='0' type="number" className='border p-2' value={quantityLG}  />
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={increaseLG}>
+                                        <i aria-hidden className="fas fa-plus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                            <div className="my-2 flex items-center justify-between">
+                                <label>XL: </label>
+                                <div className="flex">
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={decreaseXL}>
+                                        <i aria-hidden className="fas fa-minus"></i>
+                                    </button>
+                                    <input disabled min='0' type="number" className='border p-2' value={quantityXL}  />
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={increaseXL}>
+                                        <i aria-hidden className="fas fa-plus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                            <div className="my-2 flex items-center justify-between">
+                                <label>XXL: </label>
+                                <div className="flex">
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={decreaseXXL}>
+                                        <i aria-hidden className="fas fa-minus"></i>
+                                    </button>
+                                    <input disabled min='0' type="number" className='border p-2' value={quantityXXL}  />
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={increaseXXL}>
+                                        <i aria-hidden className="fas fa-plus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                            <div className="my-2 flex items-center justify-between">
+                                <label>XXXL: </label>
+                                <div className="flex">
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={decreaseXXXL}>
+                                        <i aria-hidden className="fas fa-minus"></i>
+                                    </button>
+                                    <input disabled min='0' type="number" className='border p-2' value={quantityXXXL}  />
+                                    <button className="border py-2 px-6 hover:bg-gray-200 ease-in-out duration-150" onClick={increaseXXXL}>
+                                        <i aria-hidden className="fas fa-plus"></i>
+                                    </button>
+                                </div> 
+                            </div>
+                        </div> 
+                    </div>
+                    {/* <div className='border-t border-l border-r px-4 py-4' >
                         <p className="text-xl mb-4">Quantity</p>
                         <div className="flex">
                             <button className="border p-2 w-full hover:bg-gray-200 ease-in-out duration-150" onClick={decreaseQuantity}>
@@ -82,9 +167,9 @@ const ProductPage = ({ prod }) => {
                                 <i aria-hidden className="fas fa-plus"></i>
                             </button>
                         </div> 
-                    </div>
+                    </div> */}
                     <div className='border px-4 py-4' >
-                        <AddToCart slug={product.slug} qty={quantity} size={size} wholesale={false} />
+                        <AddToCart slug={product.slug} qty={{SM: quantitySM, MD: quantityMD, LG: quantityLG, XL: quantityXL, XXL: quantityXXL, XXXL: quantityXXXL}} wholesale={false} />
                     </div>
                     <p className="text-gray-500 mt-8">Description:</p>
                     <p className='text-lg mt-4' >{ product.description }</p>

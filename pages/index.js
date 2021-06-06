@@ -4,6 +4,33 @@ import Cards from '../components/Home/Cards';
 import Carousel from '../components/Home/Carousel';
 import LinkGrid from '../components/Home/LinkGrid';
 import Subscribe from '../components/Home/Subscribe';
+import Testimonials from '../components/Home/Testimonials';
+const SliderData = [
+  {
+    name: 'Lorem Ipsum',
+    image: '/assets/test-1.jpg',
+    rating: [1, 2, 3, 4, 5],
+    quote: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur impedit odio esse.'
+  },
+  {
+      name: 'Lorem Ipsum',
+      image: '/assets/test-2.jpg',
+      rating: [1, 2, 3, 4, 5],
+      quote: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur impedit odio esse.'
+  },
+  {
+      name: 'Lorem Ipsum',
+      image: '/assets/test-3.jpg',
+      rating: [1, 2, 3, 4, 5],
+      quote: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur impedit odio esse.'
+  },
+  {
+      name: 'Lorem Ipsum',
+      image: '/assets/test-5.jpg',
+      rating: [1, 2, 3, 4, 5],
+      quote: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur impedit odio esse.'
+  },
+];
 
 export default function Home() {
   return (
@@ -14,12 +41,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <script src="https://kit.fontawesome.com/05e016c845.js" crossOrigin="anonymous"></script>
       </Head>
-      <div className="relative overflow-x-hidden">
-        <Carousel />
+      <div className="mx-auto max-w-7xl">
+        <div className="relative overflow-x-hidden">
+          <Carousel />
+        </div>
+        <Cards />
+        <LinkGrid />
+        <Testimonials slides={SliderData} />
+        <Subscribe />
       </div>
-      <Cards />
-      <LinkGrid />
-      <Subscribe />
     </Fragment>
   )
 }

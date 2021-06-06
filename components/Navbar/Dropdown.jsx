@@ -1,92 +1,92 @@
 import React from 'react';
 import Link from 'next/link';
 
-const Dropdown = () => {
+const Dropdown = ({ whole }) => {
     const tops = [
         {
             title: 'Hoodies',
-            path: '/shop?category=Apple'
+            path: '/shop?category=Hoodie'
         },
         {
             title: 'Zip Ups',
-            path: '/shop?category=zipup'
+            path: '/shop?category=Zipup'
         },
         {
             title: 'Crewnecks',
-            path: '/shop?category=crewneck'
+            path: '/shop?category=Crewneck'
         },
         {
             title: 'Short Sleeve',
-            path: '/shop?category=shortsleeve'
+            path: '/shop?category=Shortsleeve'
         },
         {
             title: 'Long Sleeve',
-            path: '/shop?category=longsleeve'
+            path: '/shop?category=Longsleeve'
         },
         {
             title: 'Polos',
-            path: '/shop?category=polo'
+            path: '/shop?category=Polo'
         },
         {
             title: 'Tanktops',
-            path: '/shop?category=tanktop'
+            path: '/shop?category=Tanktop'
         },
     ]
     const accessories = [
         {
             title: 'Hats',
-            path: '/shop?category=hat'
+            path: '/shop?category=Hat'
         },
         {
             title: 'Beanies',
-            path: '/shop?category=beanie'
+            path: '/shop?category=Beanie'
         },
         {
             title: 'Masks',
-            path: '/shop?category=mask'
+            path: '/shop?category=Mask'
         }
     ]
     const promo = [
         {
             title: 'Water Bottles',
-            path: '/shop?category=waterbottle'
+            path: '/shop?category=Waterbottle'
         },
         {
             title: 'Bags',
-            path: '/shop?category=bag'
+            path: '/shop?category=Bag'
         },
         {
             title: 'Towels',
-            path: '/shop?category=towel'
+            path: '/shop?category=Towel'
         },
         {
             title: 'Business cards',
-            path: '/shop?category=card'
+            path: '/shop?category=Card'
         },
         {
             title: 'Stickers',
-            path: '/shop?category=sticker'
+            path: '/shop?category=Sticker'
         },
     ]
     const more = [
         {
             title: 'Aprons',
-            path: '/shop?category=apron'
+            path: '/shop?category=Apron'
         },
         {
             title: 'Sweatpants',
-            path: '/shop?category=sweatpants'
+            path: '/shop?category=Sweatpants'
         },
         {
             title: 'Shorts',
-            path: '/shop?category=shorts'
+            path: '/shop?category=Shorts'
         },
         {
             title: 'Jackets',
-            path: '/shop?category=jacket'
+            path: '/shop?category=Jacket'
         },
         {
-            title: 'leggings',
+            title: 'Leggings',
             path: '/shop?category=Leggings'
         },
     ]
@@ -134,11 +134,17 @@ const Dropdown = () => {
                 </div>
             </div>
             <div className="justify-self-center flex flex-col justify-around">
-                <Link href='/shop?category=predesigned' >
-                    <a className='p-2 hover:bg-gray-200 text-lg border' >Pre-Designed</a>
+                <Link href='/shop?category=Predesigned' >
+                    <a className='p-2 hover:bg-gray-200 text-lg border text-center' >Pre-Designed</a>
                 </Link>
-                <Link href='/shop?category=vinyl' >
-                    <a className='p-2 hover:bg-gray-200 text-lg border' >Vinyl Imprint</a>
+                <Link href='/shop?category=Vinyl' >
+                    <a className='p-2 hover:bg-gray-200 text-lg border text-center' >Vinyl Imprint</a>
+                </Link>
+                <Link href={whole ? '/wholesale/shop' : '/wholesale'} >
+                    <a className='p-2 hover:bg-gray-200 text-lg border text-center' >Wholesale</a>
+                </Link>
+                <Link href='/guide' >
+                    <a className='p-2 hover:bg-gray-200 text-lg border text-center' >Size Guide</a>
                 </Link>
             </div>
         </div>
