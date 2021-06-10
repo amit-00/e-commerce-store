@@ -1,5 +1,6 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../lib/context';
+import { checkUserStatus } from '../../lib/firebase';
 import Link from 'next/link';
 import { MenuItems }from './MenuItems';
 import SignOut from '../Auth/SignOut';
@@ -8,6 +9,12 @@ import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline';
 const Sidebar = () => {
     const { user } = useContext(UserContext);
     const [active, setActive] = useState(false);
+    const [whole, setWhole] = useState(false);
+
+    useEffect(async () => {
+        const status = await checkUserStatus();
+        setWhole(status)
+    }, [user])
 
     const toggle = () => setActive(!active);
 
@@ -22,7 +29,7 @@ const Sidebar = () => {
                 </div>
                 <div className="flex flex-col justify-between w-full">
                     { MenuItems.map((item, index) => (
-                        <Link href={item.path} key={index} >
+                        <Link href={whole ? item.w : item.path} key={index} >
                             <a onClick={() => toggle()} className='text-white  px-14 py-4 hover:bg-gray-900' >{item.title}</a>
                         </Link>
                     )) }
@@ -31,22 +38,17 @@ const Sidebar = () => {
                     { user ? (
                         <>
                             <SignOut styles='text-white p-2 px-12 mb-5 flex items-center hover:bg-gray-900 w-full' />
-                            <Link href={`/profile`}>
-                                <a className='text-white p-2 px-12 mb-5 flex items-center hover:bg-gray-900'>
-                                    <p>Profile</p>
-                                </a>
-                            </Link>
                         </>
                         
                     ) : (
                         <>
                             <Link href="/login">
-                                <a className='text-white p-2 px-12 mb-5 flex items-center hover:bg-gray-900'>
+                                <a onClick={() => toggle()} className='text-white p-2 px-12 mb-5 flex items-center hover:bg-gray-900'>
                                     <p>Sign In</p>
                                 </a>
                             </Link>
-                            <Link href="/register">
-                                <a className='text-white p-2 px-12 mb-5 flex items-center hover:bg-gray-900'>
+                            <Link href="/wholesale">
+                                <a onClick={() => toggle()} className='text-white p-2 px-12 mb-5 flex items-center hover:bg-gray-900'>
                                     <p>Sign Up</p>
                                 </a>
                             </Link>

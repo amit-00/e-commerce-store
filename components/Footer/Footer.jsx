@@ -19,10 +19,10 @@ const Footer = () => {
             title: 'About',
             path: '/about'
         },
-        {
-            title: 'Services',
-            path: '/services'
-        }
+        // {
+        //     title: 'Services',
+        //     path: '/services'
+        // }
     ]
 
     const contact = ['vinyl.imprint1@gmail.com', 'Instagram: @vinyl.imprint', 'Facebook: /vinylimprint', '647-741-3874'];

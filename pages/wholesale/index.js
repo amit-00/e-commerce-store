@@ -1,9 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { registerWholesaleUser } from '../../lib/firebase';
 import { UserContext } from '../../lib/context';
+import toast from 'react-hot-toast';
 
 const wholesale = () => {
+    const { user } = useContext(UserContext);
+    const router = useRouter();
     const [formData, setFormData] = useState({
         f_name: '',
         l_name: '',
@@ -16,6 +20,12 @@ const wholesale = () => {
         cpassword: ''
     })
 
+    useEffect(() => {
+        if(user){
+            router.push('/');
+        }
+    }, [user]);
+
     const { f_name, l_name, email, address, city, country, postal, company, password, cpassword } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,7 +33,7 @@ const wholesale = () => {
         e.preventDefault();
         try{
             if(password !== cpassword){
-                return console.log('Passwords Dont Match')
+                return toast.error('Passwords Dont Match');
             }
             registerWholesaleUser(formData);
             

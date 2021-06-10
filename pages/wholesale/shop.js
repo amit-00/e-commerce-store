@@ -11,7 +11,7 @@ import { ChevronDownIcon, ChevronUpIcon, CheckIcon, SearchIcon, XCircleIcon } fr
 
 export async function getServerSideProps({ query }) {
 
-    const productsQuery = firestore.collection('products');
+    const productsQuery = firestore.collection('products').where('wholesale', '==', true);
     
     const snapshot = await productsQuery.get();
 

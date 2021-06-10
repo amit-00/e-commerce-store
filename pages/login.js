@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../lib/context';
+import { useRouter } from 'next/router';
+import { checkUserStatus, auth } from '../lib/firebase';
 import Link from 'next/link';
-import GoogleLogin from '../components/Auth/GoogleLogin';
-import { auth } from '../lib/firebase';
 
 const login = () => {
+    const { user } = useContext(UserContext);
+    const router = useRouter();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     })
+
+    useEffect(async () => {
+        const status = await checkUserStatus();
+        if(status) {
+            router.push('/wholesale/shop');
+        }
+    }, [user]);
 
     const { email, password } = formData;
 

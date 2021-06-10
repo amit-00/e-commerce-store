@@ -76,13 +76,13 @@ const Navbar = () => {
                                     </a>
                                 </Link>
                             </li>
-                            <li className='py-6' >
+                            {/* <li className='py-6' >
                                 <Link href='/services' >
                                     <a className='text-black'>
                                     Services
                                     </a>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className='py-6' onMouseEnter={() => enterDropdown()} onMouseLeave={() => exitDropdown()} >
                                 <Link href='/shop' >
                                     <a className='text-black'>

@@ -55,7 +55,7 @@ const Testimonials = ({ slides }) => {
             key={index}
           >
             {index === current && (
-              <div className='image border p-8' >
+              <div className='image border p-8 max-w-3xl' >
                   <img className='mx-auto rounded-full w-32 mb-8' src={slide.image} alt="" />
                   <h1 className="text-center text-2xl mb-4">{slide.name}</h1>
                   <div className="flex flex-row justify-center mb-8">

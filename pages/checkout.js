@@ -27,10 +27,11 @@ const checkout = () => {
             <h1 className="text-3xl max-w-7xl mx-auto mt-16">Checkout</h1>
             <div className='max-w-7xl p-8 border my-12 mx-auto' >
                 { cartItems.map(item => <CheckoutItem item={item} key={item.key} currency={cad} />) }
+                <div className="w-full flex justify-end mt-8">
+                    <button className="text-white px-4 py-2 bg-black" onClick={() => checkoutItems()} >Continue</button>
+                </div>
             </div>
-            <div className="max-w-7xl mx-auto w-full flex justify-end">
-                <button className="text-white px-4 py-2 bg-black" onClick={() => checkoutItems()} >Continue</button>
-            </div>
+            
         </div>
     )
 }
